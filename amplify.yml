@@ -3,18 +3,14 @@ frontend:
   phases:
     preBuild:
       commands:
-        - npm ci
+        - nvm install 22
+        - nvm use 22
+        - npm install -g @aws-amplify/cli@14.3.0
+        - amplify --version
     build:
       commands:
-        - echo "=== ENV VAR TEST ==="
-        - echo "TEST_ENV_VAR exists = $(if [ -n \"$TEST_ENV_VAR\" ]; then echo YES; else echo NO; fi)"
-        - echo "NEXT_PUBLIC_TEST exists = $(if [ -n \"$NEXT_PUBLIC_TEST\" ]; then echo YES; else echo NO; fi)"
-        - npm run build
+        - echo "repro 179400245300850 ok" > index.html
   artifacts:
-    baseDirectory: .next
+    baseDirectory: .
     files:
-      - '**/*'
-  cache:
-    paths:
-      - node_modules/**/*
-      - .next/cache/**/*
+      - index.html
